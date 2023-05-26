@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_220846) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_111047) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -36,6 +36,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_220846) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "appointments", force: :cascade do |t|
+    t.integer "doctor_id", null: false
+    t.integer "patient_id", null: false
+    t.text "recommendations", default: ""
+    t.string "status", default: "open"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
+    t.index ["patient_id"], name: "index_appointments_on_patient_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "doctor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_categories_on_doctor_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -46,7 +65,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_220846) do
     t.datetime "updated_at", null: false
     t.boolean "superadmin", default: false, null: false
     t.string "phone"
+    t.string "type"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appointments", "doctors"
+  add_foreign_key "appointments", "patients"
+  add_foreign_key "categories", "doctors"
 end

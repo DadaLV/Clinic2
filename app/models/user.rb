@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   validates :phone, uniqueness: true
+  validates :full_name, presence: true
   enum role: { admin: "admin", doctor: "doctor", patient: "patient" }
 
   def has_role?(role)

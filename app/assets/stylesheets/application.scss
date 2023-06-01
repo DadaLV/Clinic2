@@ -14,3 +14,9 @@
  *= require_self
  */
  @import "bootstrap";
+ @import "custom";
+
+ body {
+  background-image: url("https://res.cloudinary.com/dpz9dn6cr/image/upload/v1685630915/background_image_yylwph.jpg");
+  background-size: cover;
+}

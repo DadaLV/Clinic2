@@ -30,4 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  unauthorized:
+    manage_category: "You are not authorized to manage categories."
+    read_appointment: "You are not authorized to read appointments."
+    default: "You are not authorized to access this page."

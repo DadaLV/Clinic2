@@ -1,9 +1,10 @@
 ActiveAdmin.register User do
-  permit_params :phone, :password, :password_confirmation, :role, :superadmin
+  permit_params :phone, :password, :password_confirmation, :role, :superadmin, :full_name
 
   index do
     selectable_column
     id_column
+    column :full_name
     column :phone
     column :role
     column :current_sign_in_at
@@ -12,6 +13,7 @@ ActiveAdmin.register User do
     actions
   end
 
+  filter :full_name
   filter :phone
   filter :current_sign_in_at
   filter :sign_in_count
@@ -19,10 +21,11 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs "User Details" do
+      f.input :full_name
       f.input :phone
-      f.input :password
-      f.input :password_confirmation
-      f.input :superadmin, :label => "Super Administrator"
+      f.input :password, required: false
+      f.input :password_confirmation, required: false
+      f.input :superadmin, label: "Super Administrator"
       f.input :role, as: :select, collection: User.roles.keys, include_blank: false
     end
     f.actions

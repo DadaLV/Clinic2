@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
   get 'patients/index'
   devise_for :users
-  
-  ActiveAdmin.routes(self)
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
+  ActiveAdmin.routes(self)
+
   authenticated :user, ->(user) { user.has_role?(:patient) } do
     root to: "patients#index", as: :patient_root
     resources :doctors, only: [:index] do
@@ -19,5 +17,11 @@ Rails.application.routes.draw do
       resources :appointments, only: [:show]
     end
   end
+
+  resources :appointments, only: [:index, :new, :create, :destroy] do
+    patch :close, on: :member
+    delete :destroy, on: :member
+  end
+
   root "profiles#index"
 end

@@ -8,8 +8,8 @@
 # User.create!(phone: '1231231231', password: 'password', password_confirmation: 'password', superadmin: true, full_name: "Admin") if Rails.env.development?
 require 'faker'
 
+
 # categories = [
-#   "Cardiologist",
 #   "Gynecologist",
 #   "Neurologist",
 #   "Dentist",
@@ -26,64 +26,65 @@ require 'faker'
 #   Category.create!(name: category_name)
 # end
 
-# 10.times do
-# doctor = User.new(
-#     email: "",
-#     password: 'password',
-#     superadmin: false,
-#     phone: Faker::PhoneNumber.phone_number,
-#     type: 'Doctor',
-#     role: "doctor",
-#     full_name: Faker::Name.name)
+User.create!(
+  email: "",
+  password: 'password',
+  password_confirmation: 'password',
+  superadmin: true,
+  phone: "1112223333",
+  type: 'Patient',
+  role: "patient",
+  full_name: "Ann Keen")
 
-#     if doctor.role == "doctor"
-#       doctor.category = Category.all.sample
-#     end
-#     doctor.save!
-#   end
+User.create!(
+  email: "",
+  password: 'password',
+  password_confirmation: 'password',
+  superadmin: true,
+  phone: "1112223331",
+  type: 'Doctor',
+  role: "doctor",
+  full_name: "Dr John")
 
-
-# 10.times do
-#   doctor = User.find_or_initialize_by(role: "doctor")
-#   doctor.assign_attributes(
-#     email: "",
-#     password: 'password',
-#     superadmin: false,
-#     phone: Faker::PhoneNumber.phone_number,
-#     type: 'Doctor',
-#     full_name: Faker::Name.name
-#   )
   
-#     if doctor.new_record?
-#       doctor.save!
-#       doctor.update(category: Category.all.sample)
-#     end
-  
-#   User.create!(
-#     email: "",
-#     password: 'password',
-#     superadmin: false,
-#     phone: Faker::PhoneNumber.phone_number,
-#     type: 'Patient',
-#     role: "patient",
-#     full_name: Faker::Name.name)
-# end
-
-10.times do
-  doctor = Doctor.new(
+if Rails.env.production?
+  User.create!(
     email: "",
-    password: Faker::Internet.password,
-    superadmin: false,
-    phone: Faker::PhoneNumber.phone_number,
-    type: 'Doctor',
-    role: 'doctor',
-    full_name: Faker::Name.name
-  )
+    password: 'password',
+    password_confirmation: 'password',
+    superadmin: true,
+    phone: "1231231235",
+    type: '',
+    role: "admin",
+    full_name: "Admin")
 
-  if doctor.role == 'doctor'
-    category = Category.all.sample
-    doctor.category = category
-  end
   
-  doctor.save!
+#   10.times do
+#   doctor = User.new(
+#       email: "",
+#       password: Faker::Internet.password,
+#       superadmin: false,
+#       phone: Faker::PhoneNumber.phone_number,
+#       type: 'Doctor',
+#       role: "doctor",
+#       full_name: Faker::Name.name)
+  
+#       if doctor.role == "doctor"
+#         doctor.category = Category.all.sample
+#       end
+#       doctor.save!
+#     end
+
+#   10.times do
+#   patient = User.create!(
+#       email: "",
+#       password: Faker::Internet.password,
+#       superadmin: false,
+#       phone: Faker::PhoneNumber.phone_number,
+#       type: 'Patient',
+#       role: "patient",
+#       full_name: Faker::Name.name)
+#     end
 end
+
+

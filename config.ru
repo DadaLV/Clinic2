@@ -2,7 +2,8 @@
 
 require_relative "config/environment"
 
-
-run do |env|
-  [200, {}, ["Hello World"]]
-end
+run Rails.application
+Rails.application.load_server
+# run do |env|
+#   [200, {}, ["Hello World"]]
+# end

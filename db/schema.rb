@@ -49,8 +49,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_195139) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -73,5 +75,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_195139) do
 
   add_foreign_key "appointments", "users", column: "doctor_id"
   add_foreign_key "appointments", "users", column: "patient_id"
+  add_foreign_key "categories", "users"
   add_foreign_key "users", "categories"
 end

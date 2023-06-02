@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   authenticated :user, ->(user) { user.has_role?(:patient) } do
     root to: "patients#index", as: :patient_root
+    
     resources :doctors, only: [:index] do
       resources :appointments, only: [:index, :show]
     end
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
 
   authenticated :user, ->(user) { user.has_role?(:doctor) } do
     root to: "doctors#index", as: :doctor_root
+    
     resources :patients, only: [:index] do
       resources :appointments, only: [:show]
     end
@@ -23,5 +25,7 @@ Rails.application.routes.draw do
     delete :destroy, on: :member
   end
 
-  root "profiles#index"
+  root to: "profiles#index"
+  match '*unmatched', to: 'application#not_found_method', via: :all
+  
 end

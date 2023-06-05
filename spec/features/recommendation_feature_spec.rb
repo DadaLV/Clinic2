@@ -9,11 +9,11 @@ RSpec.describe "Recommendation Feature", type: :feature do
   end
 
   it "leaves a recommendation for a patient" do
-    visit "/patients"
-    click_link "View Patient"
+    visit "/index"
+    click_link "View Appointments"
     click_link "Leave Recommendation"
     fill_in "recommendation_content", with: "Take pills!"
     click_button "Submit"
-    expect(page).to have_content("Recommendation saved successfully.")
+    expect(page).to have_content("Appointment closed.")
   end
 end

@@ -1,6 +1,6 @@
 # fly.toml file generated for clinic2 on 2023-06-02T10:26:44+02:00
 
-app = "clinic2"
+app = "clinic3"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
@@ -9,6 +9,9 @@ processes = []
 
 [experimental]
   auto_rollback = true
+
+
+
 
 [[services]]
   http_checks = []

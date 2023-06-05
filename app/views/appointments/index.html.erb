@@ -36,7 +36,7 @@
                     Delete
                   <% end %>
                 <% elsif current_user.doctor? %>
-                  <%= link_to "Edit", edit_appointment_path(appointment), class: "btn btn-sm btn-primary" %>
+                  <%= link_to "Leave Recommendation", edit_appointment_path(appointment), class: "btn btn-sm btn-primary" %>
                   <%= button_to appointment_path(appointment), method: :delete, onclick: "return confirm('Are you sure you want to delete this appointment?')", class: "btn btn-sm btn-danger", form: { class: "d-inline" } do %>
                     Delete
                   <% end %>

@@ -26,6 +26,14 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div class="field">
+    <%= f.label :role %><br />
+    <%= f.radio_button :role, 'patient' %>
+    <%= label_tag :patient, "I'm a patient" %>
+    <%= f.radio_button :role, 'doctor' %>
+    <%= label_tag :doctor, "I'm a doctor" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

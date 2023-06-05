@@ -1,0 +1,16 @@
+<div class="container m-4">
+  <% if @appointment.status == 'open' %>
+    <%= form_with(model: @appointment, url: close_appointment_path(@appointment), method: :patch) do |form| %>
+      <div class="field">
+        <%= form.label :recommendations %>
+        <%= form.text_area :recommendations %>
+      </div>
+      
+      <div class="actions">
+        <%= form.submit 'Leave Recommendation' %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Recommendations: <%= @appointment.recommendations %></p>
+  <% end %>
+</div>

@@ -41,8 +41,8 @@ class AppointmentsController < ApplicationController
   
   def close
     @appointment = Appointment.find(params[:id])
-    @appointment.close(params[:recommendations])
-  
+    @appointment.close(params[:appointment][:recommendations])
+
     redirect_to appointments_path, notice: 'Appointment closed.'
   end
   private

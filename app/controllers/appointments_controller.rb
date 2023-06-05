@@ -1,6 +1,8 @@
 class AppointmentsController < ApplicationController
+  
   load_and_authorize_resource
   before_action :authenticate_user!
+  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
 
   def index
     if current_user.patient?
@@ -13,7 +15,6 @@ class AppointmentsController < ApplicationController
   end
 
   def show
-    @appointment = Appointment.find(params[:id])
   end
 
   def new
@@ -34,12 +35,10 @@ class AppointmentsController < ApplicationController
   end
 
   def edit
-    @appointment = Appointment.find(params[:id])
     authorize! :edit, @appointment
   end
 
   def update
-    @appointment = Appointment.find(params[:id])
     authorize! :update, @appointment
     if @appointment.update(appointment_params.merge(status: "closed"))
       redirect_to appointments_path, notice: 'Appointment closed.'
@@ -49,7 +48,6 @@ class AppointmentsController < ApplicationController
   end
 
   def destroy
-    @appointment = Appointment.find(params[:id])
     if @appointment.open?
       @appointment.destroy
       redirect_to appointments_path, notice: 'Appointment deleted successfully.'
@@ -59,6 +57,10 @@ class AppointmentsController < ApplicationController
   end
 
   private
+
+  def set_appointment
+    @appointment = Appointment.find(params[:id])
+  end
 
   def appointment_params
     params.require(:appointment).permit(:doctor_id, :patient_id, :recommendations, :status)

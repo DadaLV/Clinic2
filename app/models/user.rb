@@ -1,13 +1,14 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :category, optional: true
   has_many :appointments_as_doctor, class_name: 'Appointment', foreign_key: 'doctor_id'
   has_many :appointments_as_patient, class_name: 'Appointment', foreign_key: 'patient_id'
+
   validates :phone, uniqueness: true
   validates :full_name, presence: true
+  
   enum role: { admin: "admin", doctor: "doctor", patient: "patient" }
 
   def has_role?(role)

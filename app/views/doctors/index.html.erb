@@ -2,7 +2,7 @@
   <h1>Hello, dr. <%= current_user.full_name %></h1>
     <% if current_user.appointments_as_doctor.open.any? %>
       <p>You have <%= current_user.appointments_as_doctor.open.count %> open appointment(s).</p>
-      <%= link_to "View Appointments", doctor_appointments_path, class: "btn btn-primary" %>
+      <%= link_to "View Appointments", appointments_path(@appointments), class: "btn btn-primary" %>
     <% else %>
       <p>You don't have any appointments yet.</p>
     <% end %>

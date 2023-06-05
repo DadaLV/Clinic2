@@ -16,13 +16,20 @@ Rails.application.routes.draw do
     root to: "doctors#index", as: :doctor_root
     
     resources :patients, only: [:index] do
-      resources :appointments, only: [:show]
+      resources :appointments, only: [:index, :show, :destroy]
     end
   end
 
-  resources :appointments, only: [:index, :new, :create, :destroy] do
+  resources :appointments, only: [:index, :show, :new, :create, :update, :destroy] do
     patch :close, on: :member
     delete :destroy, on: :member
+    member do
+      get :edit
+    end
+  end
+
+  namespace :doctors do
+    resources :appointments, only: [:index, :edit, :update]
   end
 
   root to: "profiles#index"

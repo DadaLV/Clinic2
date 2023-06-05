@@ -1,6 +1,7 @@
 
 <div class="container m-4">
 <%= link_to 'Create Appointment', new_appointment_path(@appointment)%>
+<%= link_to "View Appointments", appointments_path(@appointments), class: "btn btn-primary" %>
   <h1>List of Doctors</h1>
   <table class="table table-striped">
   <thead>
@@ -14,8 +15,8 @@
     <% @doctors.each_with_index do |doctor, index| %>
       <tr>
         <td><%= index + 1 %></td>
-        <td><%= doctor.full_name %></td>
-        <td><%= doctor.category.name %></td>
+        <td><%= doctor.try(:full_name) || "" %></td>
+        <td><%= doctor.category.try(:name) || "" %></td>
       </tr>
     <% end %>
   </tbody>

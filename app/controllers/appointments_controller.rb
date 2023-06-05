@@ -12,6 +12,10 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def show
+    @appointment = Appointment.find(params[:id])
+  end
+
   def new
     @appointment = Appointment.new
     @doctors = User.where(role: 'doctor')
@@ -29,6 +33,21 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def edit
+    @appointment = Appointment.find(params[:id])
+    authorize! :edit, @appointment
+  end
+
+  def update
+    @appointment = Appointment.find(params[:id])
+    authorize! :update, @appointment
+    if @appointment.update(appointment_params.merge(status: "closed"))
+      redirect_to appointments_path, notice: 'Appointment closed.'
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @appointment = Appointment.find(params[:id])
     if @appointment.open?
@@ -38,13 +57,7 @@ class AppointmentsController < ApplicationController
       redirect_to appointment_path(@appointment), alert: 'Closed appointments cannot be deleted.'
     end
   end
-  
-  def close
-    @appointment = Appointment.find(params[:id])
-    @appointment.close(params[:appointment][:recommendations])
 
-    redirect_to appointments_path, notice: 'Appointment closed.'
-  end
   private
 
   def appointment_params

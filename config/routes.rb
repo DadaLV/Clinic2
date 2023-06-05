@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   end
 
   resources :appointments, only: [:index, :show, :new, :create, :update, :destroy] do
-    patch :close, on: :member
     delete :destroy, on: :member
     member do
       get :edit

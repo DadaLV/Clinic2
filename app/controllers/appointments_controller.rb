@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-  
+
   load_and_authorize_resource
   before_action :authenticate_user!
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
@@ -18,6 +18,7 @@ class AppointmentsController < ApplicationController
   end
 
   def new
+    authorize! :new, @appointment
     @appointment = Appointment.new
     @doctors = User.where(role: 'doctor')
     @patients = User.where(role: 'patient')

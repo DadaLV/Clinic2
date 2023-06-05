@@ -27,7 +27,7 @@ class Ability
       can :read, Patient
       can :read, Doctor
       can :read, Category
-      can [:read, :destroy], Appointment
+      can [:read, :create, :destroy], Appointment
 
       cannot :manage, Admin
     end

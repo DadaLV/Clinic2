@@ -7,16 +7,12 @@ ActiveAdmin.register Patient do
     column :full_name
     column :phone
     column :role
-    column :current_sign_in_at
-    column :sign_in_count
     column :created_at
     actions
   end
 
   filter :full_name
   filter :phone
-  filter :current_sign_in_at
-  filter :sign_in_count
   filter :created_at
 
   form do |f|

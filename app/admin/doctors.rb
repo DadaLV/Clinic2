@@ -8,8 +8,6 @@ ActiveAdmin.register Doctor do
     column :phone
     column :role
     column :category
-    column :current_sign_in_at
-    column :sign_in_count
     column :created_at
     actions
   end
@@ -17,8 +15,6 @@ ActiveAdmin.register Doctor do
   filter :full_name
   filter :phone
   filter :category
-  filter :current_sign_in_at
-  filter :sign_in_count
   filter :created_at
 
   form do |f|

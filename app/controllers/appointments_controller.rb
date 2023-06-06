@@ -1,4 +1,5 @@
 class AppointmentsController < ApplicationController
+  include Draper::Decoratable
 
   load_and_authorize_resource
   before_action :authenticate_user!
@@ -20,7 +21,7 @@ class AppointmentsController < ApplicationController
   def new
     authorize! :new, @appointment
     @appointment = Appointment.new
-    @doctors = User.where(role: 'doctor')
+    @doctors = User.where(role: 'doctor').decorate
     @patients = User.where(role: 'patient')
   end
 

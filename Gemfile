@@ -86,7 +86,7 @@ end
 
 gem "dockerfile-rails", ">= 1.4", :group => :development
 
-
+gem 'draper'
 
 gem "pg", "~> 1.5"
 

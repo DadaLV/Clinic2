@@ -25,8 +25,9 @@ test:
 production:
   <<: *default
   adapter: postgresql
+  url: <%= ENV["DATABASE_URL"]
   username: clinic3
-  password: <%= ENV['MYSITE_DATABASE_PASSWORD'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: clinic3-db.internal
   port: 5432
   database: clinic3_production 
